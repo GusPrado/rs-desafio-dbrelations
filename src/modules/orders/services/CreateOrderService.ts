@@ -29,7 +29,9 @@ class CreateOrderService {
   ) {}
 
   public async execute({ customer_id, products }: IRequest): Promise<Order> {
-    const customerExists = this.customersRepository.findById(customer_id);
+    const customerExists = await this.customersRepository.findById(customer_id);
+
+    console.log(customerExists);
 
     if (!customerExists) {
       throw new AppError(
